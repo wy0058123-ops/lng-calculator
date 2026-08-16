@@ -1,0 +1,388 @@
+:root {
+  color-scheme: light;
+  --ink: #0b2341;
+  --ink-soft: #526c89;
+  --paper: #eef6ff;
+  --card: #ffffff;
+  --line: #cadced;
+  --muted: #edf4fa;
+  --teal: #1265a8;
+  --teal-dark: #084777;
+  --lime: #6bbcff;
+  --shadow: 0 24px 70px rgba(18, 74, 125, 0.13);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 12% 8%, rgba(103, 185, 255, 0.27), transparent 25rem),
+    linear-gradient(145deg, #ffffff 0%, #e5f2ff 55%, #d8ebfa 100%);
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, -apple-system, sans-serif;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.page-shell {
+  min-height: 100vh;
+  padding: 28px 14px 36px;
+}
+
+.calculator {
+  width: min(100%, 480px);
+  margin: 0 auto;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.brand-mark {
+  display: grid;
+  width: 54px;
+  height: 54px;
+  place-items: center;
+  border-radius: 17px 7px 17px 7px;
+  color: #ffffff;
+  background: linear-gradient(145deg, #1779c5, #084777);
+  box-shadow: 8px 8px 0 var(--lime);
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.eyebrow {
+  margin: 1px 0 8px;
+  color: var(--teal);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(27px, 7vw, 34px);
+  font-weight: 850;
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+}
+
+.intro {
+  margin: 9px 0 0;
+  color: var(--ink-soft);
+  font-size: 13px;
+}
+
+.input-panel,
+.formula-card {
+  border: 1px solid rgba(18, 74, 125, 0.13);
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: var(--shadow);
+}
+
+.input-panel {
+  padding: 18px;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--ink-soft);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.input-wrap {
+  display: grid;
+  grid-template-columns: auto minmax(80px, 1fr) auto;
+  align-items: baseline;
+  gap: 9px;
+  padding: 10px 13px 11px;
+  border-bottom: 2px solid var(--teal);
+  background: #f7fbff;
+}
+
+.input-wrap:focus-within {
+  outline: 3px solid rgba(15, 106, 98, 0.15);
+  outline-offset: 3px;
+}
+
+.prefix {
+  color: var(--teal);
+  font-size: 25px;
+  font-weight: 800;
+}
+
+.input-wrap input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  color: var(--ink);
+  background: transparent;
+  font-size: clamp(32px, 9vw, 42px);
+  font-weight: 750;
+  letter-spacing: -0.04em;
+}
+
+.suffix {
+  color: var(--ink-soft);
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 13px;
+}
+
+.muted-field {
+  min-width: 0;
+  padding: 13px 14px;
+  border: 1px solid var(--line);
+  border-radius: 17px;
+  background: var(--muted);
+}
+
+.compact-input {
+  display: grid;
+  grid-template-columns: auto minmax(52px, 1fr) auto;
+  align-items: center;
+  gap: 6px;
+  color: #677d94;
+  font-size: 14px;
+}
+
+.compact-input input {
+  width: 100%;
+  min-width: 0;
+  padding: 8px 6px;
+  border: 0;
+  border-bottom: 1px dashed #8fa7bd;
+  outline: 0;
+  color: #4f6983;
+  background: transparent;
+  font-size: 20px;
+  font-weight: 750;
+  text-align: center;
+}
+
+.compact-input input:focus {
+  border-bottom-color: var(--teal);
+  color: var(--teal-dark);
+}
+
+.tax-field .compact-input {
+  grid-template-columns: minmax(52px, 1fr) auto;
+}
+
+.field-hint {
+  margin: 10px 0 0;
+  color: #7c91a6;
+  font-size: 11px;
+}
+
+.result-card {
+  position: relative;
+  overflow: hidden;
+  margin: 13px 0;
+  padding: 20px 18px;
+  border-radius: 26px;
+  color: #f7fff2;
+  background: linear-gradient(135deg, #1779c5 0%, #07518d 62%, #063c6c 100%);
+  box-shadow: 0 22px 50px rgba(14, 90, 153, 0.28);
+}
+
+.result-card::after {
+  position: absolute;
+  top: -38px;
+  right: -30px;
+  width: 160px;
+  height: 160px;
+  border: 28px solid rgba(129, 203, 255, 0.2);
+  border-radius: 50%;
+  content: "";
+}
+
+.result-label,
+.result-note {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+}
+
+.result-label {
+  color: #d9efff;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.result-value {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  margin: 8px 0 9px;
+}
+
+.currency {
+  font-size: 27px;
+  font-weight: 800;
+}
+
+.result-value strong {
+  font-size: clamp(39px, 12vw, 54px);
+  line-height: 1;
+  letter-spacing: -0.055em;
+}
+
+.result-unit {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.result-note {
+  color: rgba(240, 248, 255, 0.72);
+  font-size: 12px;
+}
+
+.formula-card {
+  padding: 18px;
+  box-shadow: none;
+}
+
+.formula-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.formula-heading h2 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.formula-heading span {
+  padding: 5px 9px;
+  border-radius: 999px;
+  color: var(--teal-dark);
+  background: #dcefff;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.formula-main {
+  margin: 13px 0 7px;
+  padding: 12px;
+  border-left: 4px solid var(--lime);
+  color: var(--ink);
+  background: #f2f8fd;
+  font-size: clamp(14px, 4vw, 17px);
+  font-weight: 800;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.formula-detail {
+  margin: 0;
+  color: #71869b;
+  font-size: 12px;
+}
+
+footer {
+  padding: 19px 8px 0;
+  color: #6d8297;
+  font-size: 11px;
+  line-height: 1.65;
+  text-align: center;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  margin: 0;
+  appearance: none;
+}
+
+@media (max-width: 600px) {
+  .page-shell {
+    padding: 20px 12px 28px;
+  }
+
+  .hero {
+    grid-template-columns: auto 1fr;
+    gap: 14px;
+  }
+
+  .brand-mark {
+    width: 48px;
+    height: 48px;
+    border-radius: 15px 6px 15px 6px;
+    font-size: 13px;
+  }
+
+  .input-panel,
+  .result-card,
+  .formula-card {
+    border-radius: 21px;
+  }
+
+  .input-panel {
+    padding: 15px;
+  }
+
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .suffix {
+    font-size: 11px;
+  }
+
+  .result-card {
+    padding: 19px 16px;
+  }
+
+  .formula-card {
+    padding: 17px 15px;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .result-card,
+  .input-panel {
+    animation: rise 500ms ease both;
+  }
+
+  .result-card {
+    animation-delay: 80ms;
+  }
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
