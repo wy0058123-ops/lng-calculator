@@ -2,10 +2,9 @@ const usdPriceInput = document.querySelector("#usd-price");
 const heatValueInput = document.querySelector("#mmbtu-per-ton");
 const exchangeRateInput = document.querySelector("#exchange-rate");
 const taxRateInput = document.querySelector("#tax-rate");
+const otherCostInput = document.querySelector("#other-cost");
 const rateHint = document.querySelector("#rate-hint");
 const resultNumber = document.querySelector("#result-number");
-const formulaMain = document.querySelector("#formula-main");
-const formulaDetail = document.querySelector("#formula-detail");
 
 const RATE_API_URL = "https://api.frankfurter.dev/v2/rate/USD/CNY";
 let applyingAutomaticRate = false;
@@ -21,47 +20,32 @@ function updateCalculation() {
   const heatValue = Number.parseFloat(heatValueInput.value);
   const exchangeRate = Number.parseFloat(exchangeRateInput.value);
   const taxRate = Number.parseFloat(taxRateInput.value);
+  const otherCost = Number.parseFloat(otherCostInput.value);
 
   const valuesAreValid =
     Number.isFinite(usdPrice) &&
     Number.isFinite(heatValue) &&
     Number.isFinite(exchangeRate) &&
     Number.isFinite(taxRate) &&
+    Number.isFinite(otherCost) &&
     usdPrice >= 0 &&
     heatValue > 0 &&
     exchangeRate > 0 &&
-    taxRate >= 0;
+    taxRate >= 0 &&
+    otherCost >= 0;
 
   if (!valuesAreValid) {
     resultNumber.textContent = "—";
-    formulaMain.textContent = "请填写美元价格，汇率加载后自动计算";
-    formulaDetail.textContent =
-      "美元价格 × 人民币汇率 × 每吨百万英热 ×（1＋税率）= 含税人民币元/吨";
     return;
   }
 
   const untaxedRmbPerTon = usdPrice * exchangeRate * heatValue;
-  const rmbPerTon = untaxedRmbPerTon * (1 + taxRate / 100);
+  const rmbPerTon = untaxedRmbPerTon * (1 + taxRate / 100) + otherCost;
 
   resultNumber.textContent = formatNumber(rmbPerTon);
-  formulaMain.textContent = `${formatNumber(
-    usdPrice,
-  )} 美元/MMBtu × ${formatNumber(
-    exchangeRate,
-    4,
-  )} 元/美元 × ${formatNumber(
-    heatValue,
-  )} MMBtu/吨 ×（1＋${formatNumber(taxRate)}%）= ${formatNumber(
-    rmbPerTon,
-  )} 元/吨`;
-  formulaDetail.textContent = `未税价 ${formatNumber(
-    untaxedRmbPerTon,
-  )} 元/吨 ＋ 税额 ${formatNumber(
-    rmbPerTon - untaxedRmbPerTon,
-  )} 元/吨 = 含税价 ${formatNumber(rmbPerTon)} 元/吨`;
 }
 
-[usdPriceInput, heatValueInput, exchangeRateInput, taxRateInput].forEach((input) => {
+[usdPriceInput, heatValueInput, exchangeRateInput, taxRateInput, otherCostInput].forEach((input) => {
   input.addEventListener("input", updateCalculation);
   input.addEventListener("change", updateCalculation);
 });

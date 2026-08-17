@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="将LNG美元/MMBtu报价快速换算为人民币元/吨，并显示完整计算公式。"
+      content="将LNG美元/MMBtu报价快速换算为人民币元/吨。"
     />
     <meta name="theme-color" content="#f4f1ea" />
     <title>LNG美元英热换算人民币计算器</title>
@@ -43,11 +43,11 @@
             </div>
           </div>
 
-          <div class="field-grid">
-            <div class="field muted-field">
-              <label for="mmbtu-per-ton">每吨百万英热</label>
-              <div class="compact-input">
-                <span>1T =</span>
+          <div class="metric-grid">
+            <div class="metric-card">
+              <label for="mmbtu-per-ton">每吨热值</label>
+              <div class="metric-input">
+                <span class="metric-prefix">1T =</span>
                 <input
                   id="mmbtu-per-ton"
                   name="mmbtu-per-ton"
@@ -58,15 +58,15 @@
                   inputmode="decimal"
                   aria-describedby="heat-hint"
                 />
-                <span>MMBtu</span>
+                <span class="metric-unit">MMBtu</span>
               </div>
-              <p class="field-hint" id="heat-hint">国际默认 1T = 52 MMBtu，可修改</p>
+              <p class="metric-hint" id="heat-hint">国际默认 52，可修改</p>
             </div>
 
-            <div class="field muted-field">
-              <label for="exchange-rate">美元兑人民币汇率</label>
-              <div class="compact-input">
-                <span>$1 =</span>
+            <div class="metric-card">
+              <label for="exchange-rate">美元汇率</label>
+              <div class="metric-input">
+                <span class="metric-prefix">$1 =</span>
                 <input
                   id="exchange-rate"
                   name="exchange-rate"
@@ -77,14 +77,14 @@
                   inputmode="decimal"
                   aria-describedby="rate-hint"
                 />
-                <span>元</span>
+                <span class="metric-unit">元</span>
               </div>
-              <p class="field-hint live-rate" id="rate-hint">正在获取每日美元汇率…</p>
+              <p class="metric-hint live-rate" id="rate-hint">正在获取每日汇率…</p>
             </div>
 
-            <div class="field muted-field tax-field">
+            <div class="metric-card">
               <label for="tax-rate">税率</label>
-              <div class="compact-input">
+              <div class="metric-input metric-input-short">
                 <input
                   id="tax-rate"
                   name="tax-rate"
@@ -95,34 +95,39 @@
                   inputmode="decimal"
                   aria-describedby="tax-hint"
                 />
-                <span>%</span>
+                <span class="metric-unit">%</span>
               </div>
-              <p class="field-hint" id="tax-hint">默认税率 9%，可修改</p>
+              <p class="metric-hint" id="tax-hint">默认 9%，可修改</p>
+            </div>
+
+            <div class="metric-card">
+              <label for="other-cost">其他费用</label>
+              <div class="metric-input metric-input-short">
+                <input
+                  id="other-cost"
+                  name="other-cost"
+                  type="number"
+                  value="0"
+                  min="0"
+                  step="0.01"
+                  inputmode="decimal"
+                  aria-describedby="cost-hint"
+                />
+                <span class="metric-unit">元/吨</span>
+              </div>
+              <p class="metric-hint" id="cost-hint">默认 0，可修改</p>
             </div>
           </div>
         </form>
 
         <section class="result-card" aria-live="polite" aria-atomic="true">
-          <p class="result-label">折合含税人民币吨价</p>
+          <p class="result-label">折合人民币综合吨价</p>
           <div class="result-value">
             <span class="currency">¥</span>
             <strong id="result-number">—</strong>
             <span class="result-unit">元/吨</span>
           </div>
           <p class="result-note">理论货值，不含手续费、仓管费、接卸及气化费用</p>
-        </section>
-
-        <section class="formula-card" aria-labelledby="formula-title">
-          <div class="formula-heading">
-            <h2 id="formula-title">本次计算公式</h2>
-            <span>实时更新</span>
-          </div>
-          <p class="formula-main" id="formula-main">
-            请填写美元价格，汇率加载后自动计算
-          </p>
-          <p class="formula-detail" id="formula-detail">
-            美元价格 × 人民币汇率 × 每吨百万英热 ×（1＋税率）= 含税人民币元/吨
-          </p>
         </section>
 
         <footer>
